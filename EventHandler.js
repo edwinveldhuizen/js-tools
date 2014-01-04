@@ -1,23 +1,26 @@
 /*
  *	EventHandler is a great class to handle custom events and is way faster than jQuery
- *	Just subscribe somewhere with EventHandler.bind('eventName', callback ) where callback gets the arguments
- *	And trigger with EventHandler.trigger('eventName', arguments)
- *	You can unsubscribe with EventHandler.unbind('eventName', callback) or with the result of bind() you got before
  *
- *	Author:		Edwin Veldhuizen || edwin.pw
+ *	EventHandler.bind	(eventName:String, callback:Function )			Subscribe on a certain event
+ *	EventHandler.trigger(eventName:String, arguments...		 )			Trigger the event with a certain amount of arguments
+ *	EventHandler.unbind	(eventName:String, callback:Function ) 			Unsubscribe to a certain event
+ *
+ *	@author	Edwin Veldhuizen <info@edwin.pw>
  */
 var EventHandler = (function (){
 	var cache 		= 	{},
 	
-	trigger		=	function (topic, args) {
+	trigger		=	function (topic) {
 		if (cache[topic]) {
 			var thisTopic	=	cache[topic],
-				i			=	thisTopic.length;
-				funct 		=	null;
-				
+				i			=	thisTopic.length,
+				funct 		=	null,
+				args 		=	Array.prototype.slice.call(arguments);
+			
+			args.shift();
 			while(i--){
 				funct 		=	thisTopic[i];
-				funct(args);
+				funct.apply(topic,args);
 			}
 		}
 	},

@@ -1,10 +1,10 @@
-/*
+/**
  *	DebugTimer is a great class to test performance by measuring time
- *	Just start with DebugTimer.start('classname')
- *	End end with DebugTimer.end('classname')
- *	It will then log the result in measured in ms.
  *
- *	Author:		Edwin Veldhuizen || edwin.pw
+ *	DebugTimer.start(className:String)
+ *	DebugTimer.end(className:String)
+ *
+ *	@author	Edwin Veldhuizen <info@edwin.pw>
  */
 
 try{

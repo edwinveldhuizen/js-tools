@@ -30,14 +30,18 @@ var EventHandler = (function (){
 		cache[topic].push(callback);
 		return [topic, callback];
 	},
-	unbind		=	function (handle, completly) {
-		var t	=	handle[0],
-			i	=	cache[t].length - 1;
+	unbind		=	function (handle, destroy) {
+		var t	=	handle[0];
+			ct	=	cache[t];
 		
-		if (cache[t]) {
-			while(i--){
-				cache[t].splice(cache[t][i], 1);
-				if(completly){ delete cache[t]; }
+		if (ct) {
+			if(destroy){
+				delete cache[t];
+			}else{
+				var len 	=	ct.length;
+				while(len--){
+					ct.splice(ct[len], 1);
+				}	
 			}
 		}
 	};
